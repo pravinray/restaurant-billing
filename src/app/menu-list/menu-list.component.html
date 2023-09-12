@@ -1,0 +1,101 @@
+<p>
+  <mat-toolbar>
+    <span>My Restaurant</span>
+  </mat-toolbar>
+</p>
+
+<p>
+  <mat-toolbar color="primary">
+    <span>Menu List</span>
+    <span class="example-spacer"></span>
+
+    <mat-chip-listbox aria-label="Menu Category">
+      <mat-chip-option
+        color="accent"
+        (click)="getData({ pageIndex: page, pageSize: size })"
+        selected
+        >All</mat-chip-option
+      >
+      <ng-container *ngFor="let item of categories">
+        <mat-chip-option
+          color="accent"
+          (click)="getData({ pageIndex: page, pageSize: size }, item.id)"
+          >{{ item.category | titlecase }}{{ item.id }}</mat-chip-option
+        >
+      </ng-container>
+    </mat-chip-listbox>
+  </mat-toolbar>
+</p>
+
+<p>
+  <mat-grid-list cols="12" rowHeight="1:11">
+    <mat-grid-tile style="background-color: aliceblue" colspan="3">
+      <span *ngIf="!menuSelected.length; else hasMenuSelected"
+        >Taste the difference</span
+      >
+
+      <ng-template #hasMenuSelected>
+        <mat-card style="background-color: unset">
+          <table class="border-bottom">
+            <tr>
+              <th>Item</th>
+              <th>Price</th>
+              <th>Qty</th>
+              <th>Discount</th>
+              <th>Total</th>
+            </tr>
+
+            <tr *ngFor="let item of menuSelected">
+              <th>{{ item.name }}</th>
+              <th>{{ item.price }}</th>
+              <th>{{ item.quantity }}</th>
+              <th>{{ item.discount }}</th>
+              <th>{{ (item.price - item.discount) * item.quantity }}</th>
+            </tr>
+          </table>
+          <br />
+
+          <span class="flex-end"> Total: {{ totalMenuSum }}</span></mat-card
+        >
+      </ng-template>
+    </mat-grid-tile>
+    <mat-grid-tile style="background-color: rgb(238, 231, 231)" colspan="9">
+      <div fxFill fxLayout="column" fxLayoutAlign="space-between">
+        <div fxLayout="row wrap" style="display: flex; flex-wrap: wrap">
+          <ng-container *ngFor="let item of data">
+            <span style="margin: 10px 30px">
+              <mat-card>
+                <mat-card-header>
+                  <mat-card-title (click)="openItemModal(item)" style="cursor: pointer;">
+                    {{ item.name }}</mat-card-title
+                  >
+                  <mat-card-subtitle>Price: {{ item.price }}</mat-card-subtitle>
+                  <mat-card-subtitle>{{
+                    getCategoryName(item.categoryId)
+                  }}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                  <img
+                    mat-card-image
+                    src="../assets/{{ getCategoryName(item.categoryId) }}.png"
+                  />
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-button (click)="buyItem(item.id)">Buy</button>
+                </mat-card-actions>
+              </mat-card>
+            </span>
+          </ng-container>
+        </div>
+
+        <mat-paginator
+          [length]="data3.length"
+          [pageSize]="size"
+          [pageIndex]="page"
+          (page)="getData($event)"
+        >
+        </mat-paginator>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</p>

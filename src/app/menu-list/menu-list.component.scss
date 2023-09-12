@@ -1,0 +1,42 @@
+.example-spacer {
+  // flex: 1 1 1 1;
+  flex: auto;
+}
+
+.example-card {
+  max-width: 400px;
+  margin: auto;
+}
+
+mat-grid-tile {
+  background: lavender;
+}
+.my-card {
+  background: lavender;
+  width: 100%;
+}
+
+img {
+  max-height: 200px;
+  max-width: 200px;
+  margin-left: 8px;
+  margin-bottom: 8px;
+}
+
+.border-bottom {
+  border-bottom: double;
+}
+
+.flex-end {
+  align-self: flex-end;
+}
+
+
+// .icon-display {
+//    transform: scale(4);
+
+//   max-height: 200px;
+//   max-width: 200px;
+//   margin-left: 8px;
+//   margin-bottom: 8px;
+// }

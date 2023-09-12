@@ -1,0 +1,12 @@
+<span style="margin: 15px 22px">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title> {{ dialogData.name }}</mat-card-title>
+      <mat-card-subtitle>Price: {{ dialogData.price }}</mat-card-subtitle>
+      <mat-card-subtitle>{{ dialogData.categoryName }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <img mat-card-image src="../../assets/{{dialogData.categoryName}}.png" />
+    </mat-card-content>
+  </mat-card>
+</span>
